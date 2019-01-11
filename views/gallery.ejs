@@ -1,0 +1,114 @@
+<% include header %> 
+
+
+
+
+
+<div class="container">
+	<div class="text-center">
+		<h1>
+			ImageView
+		</h1>
+	</div>
+	<div style="padding-top: 20px" class="row image" id='image' >
+    
+	</div>
+
+</div>
+
+
+
+
+
+<script >
+	function getHeader() {
+		var n ='';
+        var xhr = new XMLHttpRequest()
+        xhr.open('get', '/getMyGallery')
+        xhr.send()
+        xhr.onreadystatechange = function () {
+        		
+        		console.log(xhr.responseText);
+            if (xhr.readyState == 4) {
+                console.log(xhr.responseText)
+                var obj = JSON.parse(xhr.responseText); // ajax的responseText 轉成json物件
+                console.log(obj.length);
+                
+                obj.forEach(function(element) {
+                  //element = "photo"+element;
+				  console.log("headers/"+element);
+				  /*var img = document.createElement('img');
+                  img.style.width = "300px" ;
+                  img.src="headers/"+element;
+                  var xxx = document.getElementById('image');
+                  xxx.appendChild(img);*/
+                  n++;
+				});
+                //forEach 跑一次統計次數
+
+
+
+				for (i = 0; i < (obj.length - 1); i++) { 
+					//var imageArry = 'image'+n
+  					//var input = document.createElement(imageArry);
+  					var div = document.createElement('div');
+
+  					div.className = "col-lg-3";
+  					tempimgid = "imgID-"+i;
+  					div.id = tempimgid;
+  					div.style="padding:20px;";
+
+  					document.body.appendChild(div);
+  					var imgDIV = document.getElementById('image');
+  					console.log(imgDIV);
+  					imgDIV.appendChild(div);
+
+
+
+  					var img = document.createElement('img');
+                  	img.style.width = "300px" ;
+                  	img.className="img-thumbnail";
+
+                  	img.src="headers/"+obj[i];
+                  	console.log("headers/"+obj[i]);
+                  	var imgFill = document.getElementById(tempimgid);
+                  	imgFill.appendChild(img);
+                  	
+
+
+  					
+				}				
+				
+
+                
+
+
+                
+                //document.body.appendChild(img)
+            }
+            console.log(n);
+            
+        }
+        
+    }
+    getHeader() 
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+
+<% include footer %>

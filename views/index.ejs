@@ -1,0 +1,118 @@
+<% include header %> 
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3" style="padding-top: 100px">
+
+            <div>
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <!--<input type="file" name="photo" class="form-control-file" id="exampleFormControlFile1" >-->
+                    <div class = "file-field input-field">
+
+                      <div class = "btn" style="width: 120;height: 45">
+                       <span>選擇檔案</span>
+                       <input name="photo" type = "file" / >
+                   </div>
+                   <div class = "file-path-wrapper" >
+                     <input  class = "file-path validate" type = "text"
+                     placeholder = "Upload file" />
+                 </div>
+             </div>
+
+             <div class="mx-auto">
+
+                 <input  class="btn " type="submit"  value="上傳檔案">
+             </div>
+             <div style="float: right;padding-top: 20px"> 
+               <a class="btn btn-primary" href="/viewGallery" role="button">瀏覽相片</a>
+           </div>
+       </form>
+   </div>
+
+
+
+
+
+
+
+
+
+</div>
+
+</div>
+<div style="padding-top: 20px" class="row" >
+    <div id='image' class="image mx-auto" >
+
+
+
+
+    </div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+    var submit = document.querySelectorAll('input')[2]
+    submit.addEventListener('click', function () {
+        setTimeout(() => {
+            window.location.href = 'http://192.168.0.14:8080'
+        },10);
+    })
+
+    
+
+    function getHeader() {
+        var xhr = new XMLHttpRequest()
+        xhr.open('get', '/getMyHeader')
+        xhr.send()
+        xhr.onreadystatechange = function () {
+
+
+            if (xhr.readyState == 4) {
+                console.log(xhr.responseText)
+
+                var img = document.createElement('img');
+                img.style.width = "650px" ;
+                img.className="rounded";
+                img.src = xhr.responseText;
+                var xxx = document.getElementById('image');
+                xxx.appendChild(img);
+                //document.body.appendChild(img)
+            }
+        }
+    }
+    function deleteAllCookies() {
+        var cookies = document.cookie.split(";");
+
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            var eqPos = cookie.indexOf("=");
+            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+        }
+    }
+    deleteAllCookies()
+
+
+
+    getHeader() 
+</script>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+
+<% include footer %>
