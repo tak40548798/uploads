@@ -1,7 +1,7 @@
-// 先导入需要的模块
+
 var express = require('express')
 var multer = require('multer')
-// multer模块,nodejs中间件,用于上传图片
+
 var bodyParser = require('body-parser')
 var path = require("path");
 var web = express()
